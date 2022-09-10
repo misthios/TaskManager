@@ -47,6 +47,7 @@ show(){
 		FILES="$(find $TPATH -name "tasks" -type f)"
 		for file in $FILES 
 		do
+			if [ ! -s "$file" ]; then continue; fi
 			SUBPROJECT="$(echo $file | rev | cut -d/ -f2 | rev)"
 			NAME=""
 			echo +------------ $PROJECT $SUBPROJECT ----------+
