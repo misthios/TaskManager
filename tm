@@ -66,11 +66,22 @@ add(){
 
 }
 
+delete(){
+	set_path
+	FILES="$(find $TPATH -name "tasks" -type f)"
+	for file in $FILES 
+	do
+		sed -i "/$TASK/d" $file
+	done
+
+}
+
 main(){
 	mkdir -p "$TASKBASEDIR"
 	case "$CMD" in
 		show*) show $PROJECT ;;
 		add*) add $PROJECT ;;
+		delete*) delete $PROJECT ;;
 		*) echo "Command not found"
 	esac
 }
