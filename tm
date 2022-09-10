@@ -72,6 +72,7 @@ delete(){
 	FILES="$(find $TPATH -name "tasks" -type f)"
 	for file in $FILES 
 	do
+		if [ -z "$TASK" ]; then rm -rf $TPATH; continue; fi
 		sed -i "/$TASK/d" $file
 	done
 
