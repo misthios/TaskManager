@@ -5,8 +5,8 @@
 #description     :Minimal Task Manager
 #author          :Wesley van Tilburg
 #license         :MIT
-#date            :09/09/2022
-#version         :0.1
+#date            :10/09/2022
+#version         :0.2
 #==================================================================================================
 
 TASKBASEDIR="$HOME/.tasks"
@@ -77,7 +77,7 @@ add(){
 		mkdir -p "$TPATH"
 		touch "$TPATH/tasks"
 	fi
-	echo "[ ] $TASK" >> "$TPATH/tasks"
+	if [ ! -z "$TASK" ]; then echo "[ ] $TASK" >> "$TPATH/tasks"; fi
 
 }
 
