@@ -37,6 +37,20 @@ set_path(){
 	fi
 }
 
+mark(){
+	FINISH="$1"
+	set_path
+	FILES="$(find $TPATH -name "tasks" -type f)"
+	for file in $FILES 
+	do
+		if $FINISH; then
+			sed -i "s/\[ ] $TASK/[X] $TASK/g" $file
+		else
+			sed -i "s/\[X] $TASK/[ ] $TASK/g" $file
+		fi
+	done
+}
+
 show(){
 	set_path
 	if [ ! -d "$TPATH" ]; then die "Non existing project given"; fi
@@ -78,12 +92,15 @@ delete(){
 
 }
 
+
 main(){
 	mkdir -p "$TASKBASEDIR"
 	case "$CMD" in
 		show*) show $PROJECT ;;
 		add*) add $PROJECT ;;
 		delete*) delete $PROJECT ;;
+		finish*) mark true $PROJECT ;;
+		unfinish*) mark false $PROJECT ;;
 		*) echo "Command not found"
 	esac
 }
